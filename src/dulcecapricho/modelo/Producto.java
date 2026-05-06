@@ -30,3 +30,4 @@ public class Producto {
         stock -= cantidad;
     }    
 }
+// proyecto dulce capricho
