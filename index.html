@@ -5,63 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dulce Capricho</title>
     <style>
-        body{
-            margin:0;
-            font-family:Arial;
-            background:#fff8f8;
-            color:#4a2c2a;
-        }
-        header{
-            background:linear-gradient(135deg,#f8c8dc,#fff);
-            padding:80px 20px;
-            text-align:center;
-        }
-        h1{
-            font-size:50px;
-        }
-        .hero-btn{
-            background:#8b5e3c;
-            color:white;
-            padding:15px 30px;
-            border:none;
-            border-radius:30px;
-            cursor:pointer;
-            font-size:18px;
-        }
-        section{
-            padding:50px;
-            text-align:center;
-        }
-        .cards{
-            display:flex;
-            justify-content:center;
-            gap:20px;
-            flex-wrap:wrap;
-        }
-        .card{
-            background:white;
-            width:250px;
-            padding:20px;
-            border-radius:20px;
-            box-shadow:0 4px 12px rgba(0,0,0,0.1);
-            cursor:pointer;
-        }
-        .card img{
-            width:100%;
-            border-radius:15px;
-        }
-        .card a{
-            text-decoration:none;
-            color:#4a2c2a;
-        }
-        footer{
-            background:#f8c8dc;
-            text-align:center;
-            padding:20px;
-        }
+        body{margin:0;font-family:Arial;background:#fff8f8;color:#4a2c2a;}
+        header{background:linear-gradient(135deg,#f8c8dc,#fff);padding:80px 20px;text-align:center;}
+        h1{font-size:50px;}
+        .hero-btn{background:#8b5e3c;color:white;padding:15px 30px;border:none;border-radius:30px;cursor:pointer;font-size:18px;}
+        section{padding:50px;text-align:center;}
+        .cards{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+        .card{background:white;width:250px;padding:20px;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,0.1);cursor:pointer;transition:transform 0.2s;}
+        .card:hover{transform:translateY(-4px);}
+        .card img{width:100%;border-radius:15px;}
+        footer{background:#f8c8dc;text-align:center;padding:20px;}
+        footer a{color:#4a2c2a;margin:0 8px;text-decoration:none;}
+
+        /* Overlay */
+        .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:999;align-items:center;justify-content:center;}
+        .overlay.active{display:flex;}
+        .modal{background:white;border-radius:20px;width:300px;overflow:hidden;position:relative;}
+        .modal img{width:100%;height:200px;object-fit:cover;}
+        .modal-body{padding:20px;text-align:center;}
+        .modal-body h3{margin:0 0 6px;font-size:20px;color:#4a2c2a;}
+        .modal-body .precio{font-size:22px;font-weight:bold;color:#8b5e3c;margin:0 0 16px;}
+        .modal-body .desc{font-size:14px;color:#888;margin:0 0 16px;}
+        .wa-btn{background:#25D366;color:white;border:none;border-radius:30px;padding:12px 20px;font-size:16px;cursor:pointer;width:100%;}
+        .close-btn{position:absolute;top:10px;right:14px;background:rgba(255,255,255,0.9);border:none;border-radius:50%;width:30px;height:30px;font-size:18px;cursor:pointer;color:#4a2c2a;}
     </style>
 </head>
 <body>
+
 <header>
     <h1>Dulce Capricho</h1>
     <p>Endulza tu día con nuestros postres artesanales</p>
@@ -69,43 +39,38 @@
         <button class="hero-btn">Haz tu pedido</button>
     </a>
 </header>
+
 <section>
     <h2>Nuestros Postres</h2>
     <div class="cards">
-        <div class="card">
-            <a href="https://wa.me/573016090056?text=Hola,%20quiero%20pedir%20un%20Postre%20Oreo%20🍪" target="_blank">
-                <img src="oreo.jpg">
-                <h3>Postre Oreo</h3>
-                <p>$10.000</p>
-            </a>
+        <div class="card" onclick="abrirModal('Postre Oreo','$10.000','oreo.jpg','Postre cremoso con galletas Oreo y crema chantilly.','Hola,%20quiero%20pedir%20un%20Postre%20Oreo%20🍪')">
+            <img src="oreo.jpg" alt="Postre Oreo">
+            <h3>Postre Oreo</h3>
+            <p>$10.000</p>
         </div>
-        <div class="card">
-            <a href="https://wa.me/573016090056?text=Hola,%20quiero%20pedir%20un%20Tres%20Leches%20🍰" target="_blank">
-                <img src="postre.webp">
-                <h3>Tres Leches</h3>
-                <p>$8.000</p>
-            </a>
+        <div class="card" onclick="abrirModal('Tres Leches','$8.000','postre.webp','Bizcocho esponjoso bañado en tres tipos de leche.','Hola,%20quiero%20pedir%20un%20Tres%20Leches%20🍰')">
+            <img src="postre.webp" alt="Tres Leches">
+            <h3>Tres Leches</h3>
+            <p>$8.000</p>
         </div>
-        <div class="card">
-            <a href="https://wa.me/573016090056?text=Hola,%20quiero%20pedir%20un%20Postre%20de%20Arequipe%20🍮" target="_blank">
-                <img src="arequipe.jpg">
-                <h3>Postre de Arequipe</h3>
-                <p>$7.000</p>
-            </a>
+        <div class="card" onclick="abrirModal('Postre de Arequipe','$7.000','arequipe.jpg','Delicioso postre con arequipe artesanal colombiano.','Hola,%20quiero%20pedir%20un%20Postre%20de%20Arequipe%20🍮')">
+            <img src="arequipe.jpg" alt="Postre de Arequipe">
+            <h3>Postre de Arequipe</h3>
+            <p>$7.000</p>
         </div>
-        <div class="card">
-            <a href="https://wa.me/573016090056?text=Hola,%20quiero%20pedir%20una%20Selva%20Negra%20🍫" target="_blank">
-                <img src="Selva negra.jpeg">
-                <h3>Selva Negra</h3>
-                <p>$15.000</p>
-            </a>
+        <div class="card" onclick="abrirModal('Selva Negra','$15.000','Selva negra.jpeg','Torta de chocolate con cerezas y crema batida.','Hola,%20quiero%20pedir%20una%20Selva%20Negra%20🍫')">
+            <img src="Selva negra.jpeg" alt="Selva Negra">
+            <h3>Selva Negra</h3>
+            <p>$15.000</p>
         </div>
     </div>
 </section>
+
 <section>
     <h2>¿Por qué elegirnos?</h2>
     <p>Ingredientes frescos, preparación artesanal y sabor inolvidable.</p>
 </section>
+
 <footer>
     <p>
         <a href="https://wa.me/573016090056" target="_blank">WhatsApp</a> |
@@ -113,5 +78,38 @@
         <a href="https://www.tiktok.com/@dulce.capricho565" target="_blank">TikTok</a>
     </p>
 </footer>
+
+<!-- Ventana emergente -->
+<div class="overlay" id="overlay" onclick="cerrarModal(event)">
+    <div class="modal">
+        <button class="close-btn" onclick="cerrarModal()">✕</button>
+        <img id="modal-img" src="" alt="">
+        <div class="modal-body">
+            <h3 id="modal-nombre"></h3>
+            <p class="precio" id="modal-precio"></p>
+            <p class="desc" id="modal-desc"></p>
+            <button class="wa-btn" id="modal-wa">📲 Pedir por WhatsApp</button>
+        </div>
+    </div>
+</div>
+
+<script>
+function abrirModal(nombre, precio, img, desc, mensaje) {
+    document.getElementById('modal-nombre').textContent = nombre;
+    document.getElementById('modal-precio').textContent = precio;
+    document.getElementById('modal-img').src = img;
+    document.getElementById('modal-desc').textContent = desc;
+    document.getElementById('modal-wa').onclick = function() {
+        window.open('https://wa.me/573016090056?text=' + mensaje, '_blank');
+    };
+    document.getElementById('overlay').classList.add('active');
+}
+function cerrarModal(e) {
+    if (!e || e.target === document.getElementById('overlay')) {
+        document.getElementById('overlay').classList.remove('active');
+    }
+}
+</script>
+
 </body>
 </html>
