@@ -211,7 +211,7 @@
                     <p style="margin:0 0 8px;font-size:11px;color:#993556;font-weight:500;text-transform:uppercase;">Datos Bancolombia</p>
                     <p style="margin:4px 0;"><strong>Tipo de cuenta:</strong> Ahorros</p>
                     <p style="margin:4px 0;"><strong>Número de cuenta:</strong> 50900031529</p>
-                    <p style="margin:4px 0;"><strong>Titular:</strong> Luisa Fernanda Castilla Gonzales</p>
+                    <p style="margin:4px 0;"><strong>Titular:</strong> Luisa Castilla</p>
                     <p style="margin-top:10px;font-size:12px;color:#d4537e;font-weight:500;">Toma captura del comprobante y envíala por WhatsApp</p>
                 </div>
             </div>
@@ -427,12 +427,12 @@ function seleccionarPago(val) {
 
 function enviarPedido() {
     var nombre = document.getElementById('f-nombre').value;
-    var telefono = document.getElementById('f-telefono').value;
+    var telefono = '';
     var pago = document.getElementById('select-pago').value;
     var direccion = entregaSeleccionada === 'domicilio' ? document.getElementById('f-direccion').value : '';
     var pagotxt = pago === 'efectivo' ? 'Efectivo' : pago === 'bancolombia' ? 'Bancolombia' : 'Nequi';
 
-    if(!nombre || !telefono || !entregaSeleccionada || !pago) {
+    if(!nombre || !entregaSeleccionada || !pago) {
         alert('Por favor completa todos los campos');
         return;
     }
@@ -455,7 +455,6 @@ function enviarPedido() {
 
     var mensaje = 'Hola,%20quiero%20hacer%20un%20pedido!%20%0A'
         + 'Nombre:%20' + encodeURIComponent(nombre) + '%0A'
-        + 'Teléfono:%20' + encodeURIComponent(telefono) + '%0A'
         + 'Pedido:%20' + encodeURIComponent(productosTxt) + '%0A'
         + 'Entrega:%20' + encodeURIComponent(entregaTxt) + '%0A'
         + 'Pago:%20' + pagotxt;
