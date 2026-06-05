@@ -295,7 +295,7 @@ function abrirModal(nombre, precio, valor, img, desc, mensaje) {
     document.getElementById('modal-desc').textContent = desc;
     document.getElementById('modal-qty').textContent = 1;
     document.getElementById('modal-wa').onclick = function() {
-        window.open('https://wa.me/573016090056?text=' + mensaje, '_blank');
+        window.location.href = 'https://wa.me/573016090056?text=' + mensaje, '_blank';
     };
     document.getElementById('overlay').classList.add('active');
 }
@@ -459,7 +459,7 @@ function enviarPedido() {
         + 'Entrega:%20' + encodeURIComponent(entregaTxt) + '%0A'
         + 'Pago:%20' + pagotxt;
 
-    window.open('https://wa.me/573016090056?text=' + mensaje, '_blank');
+    window.location.href ='https://wa.me/573016090056?text=' + mensaje;
 }
 </script>
 
